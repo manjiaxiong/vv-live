@@ -1,0 +1,102 @@
+<!-- <loading wx:if="{{!show}}">加载中...</loading> -->
+<view class="page register">
+    <view class="fui-content">
+        <image mode="widthFix" src="{{set['regbg']}}"></image>
+    </view>
+    <view class="wait" wx:if="{{member['myaagentstatus']==0&&member['ismyaagent']==2}}">
+        <view>对不起，您的申请已经被驳回！</view>
+        <view>驳回原因：{{member['reason']}}！</view>
+    </view>
+    <block >
+        <view class="fui-cell-group">
+            <view class="fui-cell-title" wx:if="{{member['myaagentstatus']==0&&member['ismyaagent']==2}}">
+                请重新提交申请
+             </view>
+            <view class="fui-cell-title" wx:if="{{member['myaagentstatus']==0&&member['ismyaagent']==0}}">
+                欢迎加入<text class="text-danger">{{shopname}}</text>，请填写申请信息                  
+            </view>
+            <view class="fui-cell" wx:if="{{hideicode==0}}">
+                <view class="fui-cell-label">{{set.texts.icode}}</view>
+                <view class="fui-cell-info">
+                    <input bindinput="inputChange" class="fui-input" id="icode" placeholder="请填写{{set['texts']['icode']}}" type="text" value="{{mid>0?mid:''}}"></input>
+                </view>
+            </view>
+            <include src="/pages/common/diyform.wxml"></include>
+			<view style="text-align: center;padding: 24rpx;">欢迎加入<text style="color: red;">酷拉直播</text>,请填写申请信息</view>
+            <view class="fui-cell must">
+                <view class="fui-cell-label">姓名</view>
+                <view class="fui-cell-info">
+                    <input bindinput="inputChange" class="fui-input" id="realname" placeholder="请填写真实姓名,用于结算" type="text" value="{{member.realname}}"></input>
+                </view>
+            </view>
+            <view class="fui-cell must">
+                <view class="fui-cell-label">手机号</view>
+                <view class="fui-cell-info">
+                    <input bindinput="inputChange" class="fui-input" id="mobile" placeholder="请填写手机号码,方便联系" type="number" value="{{member.mobile}}"></input>
+                </view>
+            </view>
+            <view class="fui-cell ">
+                <view class="fui-cell-label">微信号</view>
+                <view class="fui-cell-info">
+                    <input bindinput="inputChange" class="fui-input" id="weixin" placeholder="请填写微信号,方便联系" type="text" value="{{member.weixin}}"></input>
+                </view>
+            </view>
+            <view class="fui-cell  ">
+                <view class="fui-cell-label ">代理等级</view>
+                <view class="fui-cell-info">
+                    <!-- <picker bindchange="bankChange" class="" range="{{aagentlevel}}" rangeKey="{{'name'}}"  value="{{bankIndex}}">{{array[name]}}</picker> -->
+					<!-- <picker bindchange="bankChange" range="{{aagentlevel}}" rangeKey="{{'name'}}"  value="{{bankIndex}}">{{array[name]}}</picker> -->
+					<picker bindchange="bindPickerChange" value="{{index}}" range="{{array}}">
+					    <view class="picker">
+					      当前选择：{{array[index]}}
+					    </view>
+					  </picker>
+                </view>
+            </view>
+            <view class="fui-cell ">
+                <view class="fui-cell-label">支付凭证</view>
+                <view class="fui-images fui-images-sm">
+                    <image catchtap="upload" class="image image-sm" data-index="{{index}}" data-src="" data-type="image-preview" src="{{item}}" wx:for="{{imgs}}">
+                        <text catchtap="upload" class="image-remove" data-index="{{index}}" data-type="image-remove">
+                            <text class="icox icox-close"></text>
+                        </text>
+                    </image>
+					<view class="fui-cell-info" style="position: absolute;top: 60rpx;right: 30rpx;color: red;">请上传支付凭证清晰图片</view>
+                </view>
+                <view catchtap="upload" class="fui-uploader fui-uploader-sm" data-type="image"></view>
+            </view>
+			<view class="fui-cell ">
+			    <view class="fui-cell-label">身份证信息</view>
+			    <view class="fui-images fui-images-sm">
+			        <image catchtap="upload" class="image image-sm" data-index="{{index}}" data-src="" data-type="image-preview" src="{{item}}" wx:for="{{imgs}}">
+			            <text catchtap="upload" class="image-remove" data-index="{{index}}" data-type="image-remove">
+			                <text class="icox icox-close"></text>
+			            </text>
+			        </image>
+					<view class="fui-cell-info" style="position: absolute;top: 60rpx;right: 30rpx;color: red;">请上传身份证正面清晰图片</view>
+			    </view>
+			    <view catchtap="upload" class="fui-uploader fui-uploader-sm" data-type="image"></view>
+			</view>
+        </view>
+		<view class="fui-cell" style="padding: 24rpx;">
+		    <view class="fui-cell-info" >
+					<checkbox-group bindchange="checkboxChange">
+					  <label class="checkbox" >
+					    <checkbox value="true" checked=""/><view>我已经阅读并同意<text style="color: ##337ab7;">【主播协议】。</text></view>
+					  </label>
+					</checkbox-group>
+		    </view>
+		</view>
+        <view bindtap="submit" class="btn btn-danger block btn-submit">
+            申请成为{{set['texts']['myaagent']}}           
+        </view>
+    </block>
+    <view class="wait" wx:if="{{member['myaagentstatus']==0&&member['ismyaagent']==1}}">
+        <image src="/static/images/icon/wait-128.png"></image>
+        <view>谢谢您的支持，请等待审核！</view>
+        <navigator class="btn btn-danger" openType="switchTab" url="/pages/index/index">去商城逛逛</navigator>
+    </view>
+</view>
+<navigator class="commission-shouye" openType="switchTab" url="/pages/index/index">
+    <text class="icox icox-shouye"></text>
+</navigator>

@@ -1,0 +1,116 @@
+<view class="flex main">
+    <scroll-view scrollY class="left">
+        <view bindtap="clickLab" class="{{arrLab[index]?'active leftItem':'leftItem'}}" data-id="{{index}}" wx:for="{{arrLabel}}" wx:key="unique">
+            <view>{{item}}</view>
+        </view>
+    </scroll-view>
+    <scroll-view scrollY class="right" scrollIntoView="{{'num'+id}}" scrollWithAnimation="true">
+        <view id="num0">
+            <view class="tit">热卖商品</view>
+            <view class="goodsList flex" wx:for="{{hotGoods}}">
+                <image src="../../../../img/2.jpg"></image>
+                <view>
+                    <view class="height">
+                        <view>话费50元实时到账中国移动/联通/电信 {{item.name}}</view>
+                        <view>领券下单再减3元</view>
+                    </view>
+                    <view>￥2999<i>月销14</i>
+                    </view>
+                </view>
+                <view class="{{num[item.id]?'addShopCar flex':'addShopCar flex onlyadd'}}">
+                    <image bindtap="sub" data-id="{{item.id}}" src="../../../../img/sub.png" wx:if="{{num[item.id]}}"></image>
+                    <text wx:if="{{num[item.id]}}">{{num[item.id]}}</text>
+                    <image bindtap="touchOnGoods" data-id="{{item.id}}" src="../../../../img/add.png"></image>
+                </view>
+            </view>
+        </view>
+        <view id="num1">
+            <view class="tit">电脑办公</view>
+            <view class="bigImg">
+                <image mode="center" src="../../../../img/bg.jpg"></image>
+                <view>名称标题标题</view>
+                <view>描述介绍介绍</view>
+            </view>
+            <view class="goodsList flex" wx:for="{{hotGoods}}">
+                <image src="../../../../img/2.jpg"></image>
+                <view>
+                    <view class="height">
+                        <view>话费50元实时到账中国移动/联通/电信 {{item.name}}</view>
+                        <view>领券下单再减3元</view>
+                    </view>
+                    <view>￥2999<i>月销14</i>
+                    </view>
+                </view>
+                <view class="{{num[item.id]?'addShopCar flex':'addShopCar flex onlyadd'}}">
+                    <image bindtap="sub" data-id="{{item.id}}" src="../../../../img/sub.png" wx:if="{{num[item.id]}}"></image>
+                    <text wx:if="{{num[item.id]}}">num[item.id]</text>
+                    <image bindtap="touchOnGoods" data-id="{{item.id}}" src="../../../../img/add.png"></image>
+                </view>
+            </view>
+        </view>
+        <view id="num2">
+            <view class="tit">数码影音</view>
+            <view class="bigImg">
+                <image mode="center" src="../../../../img/bg.jpg"></image>
+                <view>名称标题标题</view>
+                <view>描述介绍介绍</view>
+            </view>
+            <view class="goodsList flex" wx:for="{{hotGoods}}">
+                <image src="../../../../img/2.jpg"></image>
+                <view>
+                    <view class="height">
+                        <view>话费50元实时到账中国移动/联通/电信 {{item.name}}</view>
+                        <view>领券下单再减3元</view>
+                    </view>
+                    <view>￥2999<i>月销14</i>
+                    </view>
+                </view>
+                <view class="{{num[item.id]?'addShopCar flex':'addShopCar flex onlyadd'}}">
+                    <image bindtap="sub" data-id="{{item.id}}" src="../../../../img/sub.png" wx:if="{{num[item.id]}}"></image>
+                    <text wx:if="{{num[item.id]}}">{{num[item.id]}}</text>
+                    <image bindtap="touchOnGoods" data-id="{{item.id}}" src="../../../../img/add.png"></image>
+                </view>
+            </view>
+        </view>
+    </scroll-view>
+</view>
+<view bindtap="shopCarList" class="shopCar">
+    <image class="shopCarImg" src="../../../../img/2.jpg"></image>
+    <i></i>
+</view>
+<view class="{{clickCar?'shopCarList':'shopCarList displayNo'}}">
+    <view>
+        <view class="flex scListTit">
+            <text>购物车</text>
+            <text bindtap="clearShopCartFn">清空</text>
+        </view>
+        <scroll-view scrollY class="footerList">
+            <view class="carList" wx:for="{{carList}}">
+                <view class="goodsMsg">
+                    <view>{{item}}</view>
+                    <view>官方标配</view>
+                </view>
+                <view class="addShopCar flex">
+                    <image src="../../../../img/sub.png"></image>
+                    <text>1</text>
+                    <image bindtap="add" src="../../../../img/add.png"></image>
+                </view>
+                <view class="money">￥6999</view>
+            </view>
+            <text class="noGoods" wx:if="{{!carList.length}}">暂时没有商品喔~</text>
+        </scroll-view>
+        <view class="tips" wx:if="{{carList.length}}">Tips：加入购物车后请尽快下单哦~</view>
+        <view class="flex shopCar2">
+            <view bindtap="shopCarHid" class="carIcon">
+                <image src="../../../../img/2.jpg"></image>
+                <i>4</i>
+            </view>
+            <view class="total">
+                <view>￥139</view>
+                <view>优惠信息请至结算页面查看</view>
+            </view>
+            <view>去结算</view>
+        </view>
+    </view>
+</view>
+<view class="good_box" hidden="{{hide_good_box}}" style="left: {{bus_x}}px; top: {{bus_y}}px;"></view>
